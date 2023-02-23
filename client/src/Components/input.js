@@ -1,6 +1,6 @@
 import React,{Fragment,useState} from 'react';//fragment used to create fragment tag(?)/useState used to give input
 const Inputtodo = ()=>{//component creation
-const [description,setDescription] = useState("default description");
+const [description,setDescription] = useState("default description");//used to declare and set(encapsulated)
 
 const onFormSubmit = async e =>{
     e.preventDefault();//so page dont refresh on submit
@@ -12,7 +12,7 @@ const onFormSubmit = async e =>{
             body:JSON.stringify(body)//convert text to json
         });
         console.log(response);
-
+        window.location('/') ;
     } catch (err) {
         console.error(err.message);
     }
