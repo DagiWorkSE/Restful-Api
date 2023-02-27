@@ -6,7 +6,7 @@ import Listtodo from './Components/list';
 function App() {
   return (
     <Fragment>
-      <div className='container mt-5'>
+      <div className='container mt-5 alert alert-warning'>
         <Inputtodo/>
         <Listtodo/>
       </div>

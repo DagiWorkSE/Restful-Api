@@ -1,5 +1,5 @@
 import React,{Fragment,useState, useEffect} from "react";
-import EditTodo from "./edit";
+import EditTodo from "./editTodo";
 const Listtodo = ()=>{
 const [todos,setTodos] = useState([]);//declared empty array
 
@@ -9,10 +9,10 @@ const [todos,setTodos] = useState([]);//declared empty array
         setTodos(jsonData);
     }
     const deleteTodo = async (id)=>{
-        const deleteTodo = await fetch(`http://localhost:5000/remove_todo:${id}`,{
+        const deleteTodo = await fetch(`http://localhost:5000/remove_todo/${id}`,{
             method:"delete"
         });
-        setTodos(todos.filter(todo => todo.todo_id !== id));
+        setTodos(todos.filter(todo => todo.id !== id));
     }
     useEffect(()=>{
         getTodos();
@@ -30,13 +30,17 @@ const [todos,setTodos] = useState([]);//declared empty array
                     </tr>
                 </thead>
                 <tbody>
-                    {todos.map(todo_S => {
-                        <tr key={todo_S.todo_id}>
-                            <td>{todo_S.todo_id}</td>
-                            <td>{todo_S.description}</td>
-                            <EditTodo />
-                            <td>Edit <button className="btn btn-danger" onClick={()=>deleteTodo(todo_S.todo_id)}>Delete</button></td>
+                    {todos.map(t => {
+                        return(
+                        <tr key={t.id}>
+                            <td>{t.id}</td>
+                            <td>{t.description}</td>
+                            <td>
+                                <EditTodo todo={t}/>
+                                <button className="btn btn-danger" onClick={()=>deleteTodo(t.id)}>Delete</button>
+                            </td>
                         </tr>
+                        )
                     })}
                 </tbody>
             </table>
